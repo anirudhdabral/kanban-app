@@ -14,9 +14,13 @@ export const KanbanBoard = () => {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        const exisitingData = JSON.parse(localStorage.getItem("kanban-board") || "");
-        setColumns(exisitingData.columns)
-        setTasks(exisitingData.tasks)
+        try {
+            const exisitingData = JSON.parse(localStorage.getItem("kanban-board") || "");
+            setColumns(exisitingData.columns)
+            setTasks(exisitingData.tasks)
+        } catch (error) {
+            console.log("No previous data found")
+        }
         setLoading(false)
     }, [])
 
